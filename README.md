@@ -9,7 +9,7 @@ To read the sketch, the input key is hashed, the corresponding array elements ar
 ### Request Pacing
 This sketch may be used to ensure a minimum latency between granted requests (ie a maximum frequency) for a service such as packet forwarding, API response, or asset usage. Given an indefinite sequence of requests, a service can use this sketch to estimate for each requestor R, when the last request from R was granted, and whether enough time has passed for its request to be granted again. 
 
-In the case of a collision, the sketch may incorrectly report a later time. A key may therefore experience expanding latency between granted requests, but each request will have a fair chance versus other colliding keys.
+In the case of a collision, the sketch may incorrectly report a later last-granted time. A key may therefore experience expanding latency between granted requests, but each request will have a fair chance versus other colliding keys.
 
 A useful property of this failure mode is that even with an unbounded keyspace the total request grant rate will approach a constant, as each array element can allow only one request per L regardless of collisions. The sketch can therefore be sized to keep delivery rate below the maximum capacity of the service.
 
