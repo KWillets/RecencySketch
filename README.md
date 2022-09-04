@@ -11,7 +11,7 @@ This sketch may be used to ensure a minimum latency between granted requests (ie
 
 In the case of a collision, the sketch may incorrectly report a later last-granted time. A key may therefore experience expanding latency between granted requests, but each request will have a fair chance versus other colliding keys.
 
-A useful property of this failure mode is that even with an unbounded keyspace the total request grant rate will approach a constant, as each array element can allow only one request per L regardless of collisions. The sketch can therefore be sized to keep delivery rate below the maximum capacity of the service.
+A useful property of this failure mode is that even with an unbounded keyspace the total request grant rate will approach a constant, as each array element can allow only one request per L regardless of collisions. The sketch can therefore be sized to keep delivery rate below the maximum throughput of a service.
 
 ### Time-based Caching
 For TTL-based cache, approximate recency can serve as a filter before querying the cache itself, to avoid querying an expired item. The reported insertion time will never be before the actual, but if a collision sets a later time the cache may be incorrectly queried for an expired item. The asymptotic failure state is to query the cache unconditionally, as if the filter does not exist, so it is fail-safe in that way.
