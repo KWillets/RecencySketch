@@ -11,7 +11,7 @@ Pacing refers to enforcing a per-client maximum frequency of granted requests fo
 
 In this scenario, the sketch estimates for each requestor R, when the last request from R was granted, and the service grants or refuses requests based on this value.
 
-In the case of a collision, the sketch may incorrectly report a later last-granted time. A key may therefore experience expanding latency between granted requests.
+In the case of a collision, the sketch may incorrectly report a later last-granted time. A client may therefore experience expanding latency between granted requests, but it will never see a smaller-than-minimum latency, due to the one-sidedness of the error. 
 
 A useful property of this failure mode is that even with an unbounded keyspace the total request grant rate will approach a constant, as each array element can allow only one request per L regardless of collisions. The sketch can therefore be sized to keep delivery rate below the maximum throughput of a service.
 
